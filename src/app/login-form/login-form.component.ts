@@ -31,12 +31,7 @@ export class LoginFormComponent implements OnInit {
 
   submit() {
     const {login, password } = this.form.value;
-
-    const result: LoginResponse = this.auth.login(login, password);
-    console.log(result);
-    if (this.auth.isAuth()) {
-      this.router.navigate(['/']);
-    }
+    this.auth.login(login, password).subscribe(_ => { this.router.navigate(['/']); }, err => { console.error("AUTH_ERROR", err.error); });
   }
 
 }

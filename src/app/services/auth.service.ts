@@ -28,15 +28,13 @@ export class AuthService {
         return this.http.post<Response>(`${environment.SERVER_URL}/auth/login`, pair);
     }
 
-    public login(login: string, password1: string): Observable<LoginResponse> {
+    public login(login: string, password1: string): Observable<any> {
 
         const pair: LoginPair = {
             username: login,
             password: password1
         };
-        return = this.fetchLogin(pair).pipe(map(r=>r))
-        
-
+        return this.fetchLogin(pair);
     }
 
     public logout() {
