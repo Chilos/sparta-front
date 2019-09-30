@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
-import { LoginResponse } from '../login-form/login-form.component';
 
 
 export interface LoginPair {
@@ -22,24 +21,23 @@ export interface Response {
 })
 export class AuthService {
 
+    public showNavbar: BehaviorSubject<boolean> = new BehaviorSubject(true);
+
     constructor(private http: HttpClient) {}
 
-    private fetchLogin(pair: LoginPair): Observable<Response> {
-        return this.http.post<Response>(`${environment.SERVER_URL}/auth/login`, pair);
-    }
-
+    
     public login(login: string, password1: string): Observable<Response> {
 
         const pair: LoginPair = {
             username: login,
             password: password1
         };
-        return this.fetchLogin(pair);
+        return this.http.post<Response>(`${environment.SERVER_URL}/auth/login`, pair);
     }
 
     public logout() {
+        this.showNavbar.next(false);
         localStorage.removeItem('token');
-        console.log('remove token');
     }
 
     public isAuth(): boolean {

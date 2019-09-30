@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,6 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
 
-    constructor(router: Router, auth: AuthService) {
-      if (!auth.isAuth()) {
-        router.navigate(['login']);
-      }
+    constructor(router: Router, public auth: AuthService) {
     }
 }

@@ -17,11 +17,11 @@ export class LoginFormComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     if (this.auth.isAuth()) {
-        this.router.navigate(['/']);
+      this.router.navigate(['/home']);
     }
     this.form = new FormGroup({
       login: new FormControl('', Validators.required),
@@ -30,11 +30,11 @@ export class LoginFormComponent implements OnInit {
   }
 
   submit() {
+
     const {login, password } = this.form.value;
     this.auth.login(login, password).subscribe(res => {
-
       this.auth.setTokenToLocalStorage(res.token);
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
      }, err => {
        console.error("AUTH_ERROR", err.error);
       });
