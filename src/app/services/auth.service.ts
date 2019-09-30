@@ -28,7 +28,7 @@ export class AuthService {
         return this.http.post<Response>(`${environment.SERVER_URL}/auth/login`, pair);
     }
 
-    public login(login: string, password1: string): Observable<any> {
+    public login(login: string, password1: string): Observable<Response> {
 
         const pair: LoginPair = {
             username: login,
@@ -46,7 +46,7 @@ export class AuthService {
         return this.getTokenFromLocalStorage() ? true : false;
     }
 
-    private setTokenToLocalStorage(token: string) {
+    public setTokenToLocalStorage(token: string) {
         localStorage.setItem('token', token);
     }
 

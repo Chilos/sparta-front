@@ -31,7 +31,13 @@ export class LoginFormComponent implements OnInit {
 
   submit() {
     const {login, password } = this.form.value;
-    this.auth.login(login, password).subscribe(_ => { this.router.navigate(['/']); }, err => { console.error("AUTH_ERROR", err.error); });
+    this.auth.login(login, password).subscribe(res => {
+
+      this.auth.setTokenToLocalStorage(res.token);
+      this.router.navigate(['/']);
+     }, err => {
+       console.error("AUTH_ERROR", err.error);
+      });
   }
 
 }
