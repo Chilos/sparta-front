@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-    constructor(router: Router, public auth: AuthService) {
+    constructor(private router: Router) {
+      router.navigateByUrl('login');
     }
 }

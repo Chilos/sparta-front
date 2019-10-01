@@ -3,11 +3,6 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-export interface LoginResponse {
-  success: boolean;
-  error?: string;
-}
-
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -21,7 +16,7 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit() {
     if (this.auth.isAuth()) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['']);
     }
     this.form = new FormGroup({
       login: new FormControl('', Validators.required),
@@ -33,8 +28,8 @@ export class LoginFormComponent implements OnInit {
 
     const {login, password } = this.form.value;
     this.auth.login(login, password).subscribe(res => {
-      this.auth.setTokenToLocalStorage(res.token);
-      this.router.navigate(['/home']);
+      this.auth.setTokenToLocalStorage(res.token, res.id);
+      this.router.navigate(['']);
      }, err => {
        console.error("AUTH_ERROR", err.error);
       });
