@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, UserInfo } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
+import { UserInfo, AuthService } from 'src/app/services/auth.service';
 
 
 export interface RouteNavigatin {
@@ -15,12 +16,18 @@ export interface RouteNavigatin {
 })
 export class MainLayoutComponent implements OnInit {
 
-  public curretUser: UserInfo;
+  public curretUser: UserInfo = {
+    id: '',
+    phoneNumber: '',
+     role: '',
+     username: ''
+  };
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private users: UsersService, private router: Router, private auth: AuthService) { }
+
   routeNavigation: RouteNavigatin[];
   ngOnInit() {
-    this.auth.getCurrentUser().subscribe(res => {
+    this.users.getCurrentUser().subscribe(res => {
       console.log('userInfo', res);
       this.curretUser = res;
       if (res.role === 'admin') {

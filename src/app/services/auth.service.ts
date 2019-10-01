@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
+import { HttpWrapperService } from './httpWraper.service';
 
 
 export interface LoginPair {
@@ -37,8 +38,6 @@ export interface LocalStorageStore {
 })
 export class AuthService {
 
-    public userInfo: UserInfo;
-
     constructor(private http: HttpClient) {}
 
     public login(login: string, password1: string): Observable<Response> {
@@ -50,14 +49,7 @@ export class AuthService {
         return this.http.post<Response>(`${environment.SERVER_URL}/auth/login`, pair);
     }
 
-    public getCurrentUser(): Observable<UserInfo> {
-        const httpOptions = {
-            headers: new HttpHeaders({
-              'Content-Type':  'application/json',
-              'access_token': this.getTokenFromLocalStorage().token,
-            })};
-        return this.http.get<UserInfo>(`${environment.SERVER_URL}/user/${this.getTokenFromLocalStorage().userId}`, httpOptions);
-    }
+
 
     public logout() {
         localStorage.removeItem('token');
@@ -73,7 +65,7 @@ export class AuthService {
         localStorage.setItem('userid', userid);
     }
 
-    private getTokenFromLocalStorage(): LocalStorageStore {
+    public getTokenFromLocalStorage(): LocalStorageStore {
         return {
             token: localStorage.getItem('token'),
             userId: localStorage.getItem('userid'),
