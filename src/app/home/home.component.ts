@@ -9,12 +9,14 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  public display: boolean;
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
-
+  onCloseHandle() {
+    console.log('Click', "clock");
+  }
 
 }
