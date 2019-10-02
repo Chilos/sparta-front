@@ -5,7 +5,12 @@
     max-width: 500px;
     overflow: hidden;
 
-    h1 {
+    img {
+        text-align: center;
+        display: block;
+        align-content: center;
         margin: auto;
+        -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .5));
+        filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .5));
     }
 }
