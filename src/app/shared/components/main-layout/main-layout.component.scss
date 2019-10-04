@@ -1,0 +1,14 @@
+img {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  -webkit-filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.3));
+}
+nav{
+    margin: 0 2rem;
+}
+.menu{
+  display: flex;
+  justify-content: right;
+}
