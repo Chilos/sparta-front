@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
-import { HttpWrapperService } from './httpWraper.service';
+import { environment } from 'src/environments/environment';
 
 
 export interface LoginPair {
@@ -24,7 +23,7 @@ export interface UserInfo {
     id: string;
     role: string;
     username: string;
-    phoneNumber: string;
+    phoneNumber?: string;
 }
 
 export interface LocalStorageStore {
@@ -40,11 +39,11 @@ export class AuthService {
 
     constructor(private http: HttpClient) {}
 
-    public login(login: string, password1: string): Observable<Response> {
+    public login(login: string, password: string): Observable<Response> {
 
         const pair: LoginPair = {
             username: login,
-            password: password1
+            password
         };
         return this.http.post<Response>(`${environment.SERVER_URL}/auth/login`, pair);
     }

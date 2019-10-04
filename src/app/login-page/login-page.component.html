@@ -1,0 +1,20 @@
+<div class="container">
+  <mat-card class="card mat-elevation-z13">
+    <form class="form-container" [formGroup]="form" (ngSubmit)="submit()">
+      <img src=".\assets\logo.svg" height="220" alt="">
+      <mat-form-field>
+        <input matInput placeholder="Введите имя пользователя" formControlName="username">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Введите пароль" [type]="passwordHide ? 'password' : 'text'"
+          formControlName="password">
+        <a mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="passwordHide">
+          <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </a>
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary" class="btn-submit"
+        [disabled]="form.invalid">Войти</button>
+    </form>
+  </mat-card>
+</div>

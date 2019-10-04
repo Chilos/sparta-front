@@ -1,0 +1,27 @@
+.container{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.card {
+  min-width: 300px;
+  max-width: 350px;
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  img {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    -webkit-filter: drop-shadow(7px 7px 4px rgba(0,0,0,0.5));      
+    filter: drop-shadow(7px 7px 4px rgba(0,0,0,0.5));  
+  }
+
+  btn-submit {
+    margin-top: 1rem;
+  }
+}

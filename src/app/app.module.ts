@@ -1,37 +1,54 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { LoginFormComponent } from './login-form/login-form.component';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { Routes, RouterModule, Router } from '@angular/router';
-import { AuthGuard } from './auth.guard';
-import { AuthLayoutComponent } from './shared/layout/auth-layout/auth-layout.component';
-import { MainLayoutComponent } from './shared/layout/main-layout/main-layout.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { AppComponent } from './app.component';
+import { AuthLayoutComponent } from './shared/components/auth-layout/auth-layout.component';
+import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
+import { AppRoutingModule } from './app-routing.module';
+import { UsersPageComponent } from './users-page/users-page.component';
+import { OptionsPageComponent } from './options-page/options-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-const routes: Routes = [
-  {path: '', component: MainLayoutComponent, canActivate: [AuthGuard], loadChildren: './home/home.module#HomeModule'},
-  {path: '', component: AuthLayoutComponent, children: [ {path: 'login', component: LoginFormComponent } ]},
-  {path: '**', redirectTo: 'login'}
-];
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginFormComponent,
     AuthLayoutComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    UsersPageComponent,
+    OptionsPageComponent,
+    LoginPageComponent
   ],
   imports: [
-    RouterModule.forRoot(routes),
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatMenuModule,
+    FlexLayoutModule
   ],
-  exports: [RouterModule],
+
   providers: [],
   bootstrap: [AppComponent]
 })
