@@ -7,13 +7,14 @@ import { AuthLayoutComponent } from './shared/components/auth-layout/auth-layout
 import { UsersPageComponent } from './users-page/users-page.component';
 import { OptionsPageComponent } from './options-page/options-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 
 const routes: Routes = [
   {path: '', component: MainLayoutComponent, children: [
     {path: '', redirectTo: '/users', pathMatch: 'full'},
-    {path: 'users', component: UsersPageComponent},
-    {path: 'options', component: OptionsPageComponent},
+    {path: 'users', component: UsersPageComponent, canActivate: [AuthGuard]},
+    {path: 'options', component: OptionsPageComponent, canActivate: [AuthGuard]},
 
   ]},
   {path: '', component: AuthLayoutComponent, children: [

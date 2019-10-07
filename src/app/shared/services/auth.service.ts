@@ -1,35 +1,9 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment';
-
-
-export interface LoginPair {
-    username: string;
-    password: string;
-
-}
-
-export interface Response {
-    id: string;
-    token: string;
-    tokenExpirationTime: number;
-    role: string;
-    username: string;
-}
-
-export interface UserInfo {
-    id: string;
-    role: string;
-    username: string;
-    phoneNumber?: string;
-}
-
-export interface LocalStorageStore {
-    token: string;
-    userId: string;
-}
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { LoginUser, AuthResponse } from '../interfaces';
+import { environment } from 'src/environments/environment.prod';
+import { Observable, throwError, Subject } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -37,37 +11,62 @@ export interface LocalStorageStore {
 })
 export class AuthService {
 
-    constructor(private http: HttpClient) {}
+    public error$: Subject<string> = new Subject<string>();
 
-    public login(login: string, password: string): Observable<Response> {
+    constructor(private http: HttpClient) { }
 
-        const pair: LoginPair = {
-            username: login,
-            password
-        };
-        return this.http.post<Response>(`${environment.SERVER_URL}/auth/login`, pair);
+    get token(): string {
+        const expDate = new Date(localStorage.getItem('api-exptime-token'));
+        if (expDate < new Date()) {
+            this.logout();
+            return null;
+        }
+        return localStorage.getItem('api-token');
     }
 
-
-
-    public logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userid');
+    login(user: LoginUser): Observable<AuthResponse> {
+        return this.http.post<AuthResponse>(`${environment.SERVER_URL}/auth/login`, user)
+            .pipe(
+                tap(this.setToken),
+                catchError(this.handleError.bind(this))
+            );
     }
 
-    public isAuth(): boolean {
-        return localStorage.getItem('token') ? true : false;
+    private handleError(error: HttpErrorResponse) {
+        const { error_code } = error.error;
+
+        switch (error_code) {
+            case 'USER_NOT_FOUND':
+                this.error$.next('USER_NOT_FOUND');
+                break;
+            case 'INVALID_PASSWORD':
+                this.error$.next('INVALID_PASSWORD');
+                break;
+            case 'CHANGE_PASSWORD':
+                this.error$.next('CHANGE_PASSWORD');
+                break;
+        }
+
+        return throwError(error);
     }
 
-    public setTokenToLocalStorage(token: string, userid: string) {
-        localStorage.setItem('token', token);
-        localStorage.setItem('userid', userid);
+    logout() {
+        this.setToken(null);
     }
 
-    public getTokenFromLocalStorage(): LocalStorageStore {
-        return {
-            token: localStorage.getItem('token'),
-            userId: localStorage.getItem('userid'),
-        };
+    isAuthenticated(): boolean {
+        return !!this.token;
+    }
+
+    private setToken(response: AuthResponse | null) {
+        if (response) {
+            const expDate = new Date(new Date().getTime() + +response.tokenExpirationTime * 1000);
+            localStorage.setItem('api-token', response.token);
+            localStorage.setItem('api-exptime-token', expDate.toString());
+            localStorage.setItem('curent-user-id', response.id);
+        } else {
+            localStorage.clear();
+        }
+
     }
 }
