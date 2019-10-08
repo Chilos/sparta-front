@@ -1,17 +1,25 @@
 import { Injectable } from '@angular/core';
+import { User, EditUser } from '../interfaces';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { AuthService, UserInfo } from './auth.service';
-import { HttpWrapperService } from './httpWraper.service';
-import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UsersService {
 
-    constructor(private http: HttpWrapperService, private auth: AuthService) { }
+    constructor(private http: HttpClient) { }
 
-    public getCurrentUser(): Observable<UserInfo> {
-        return this.http.get<UserInfo>(`${environment.SERVER_URL}/user/${this.auth.getTokenFromLocalStorage().userId}`);
+    public getCurrentUser(): Observable<User> {
+        return this.http.get<User>(`${environment.SERVER_URL}/user/${localStorage.getItem('curent-user-id')}`);
+    }
+
+    public getAllUsers(): Observable<User[]> {
+        return this.http.get<User[]>(`${environment.SERVER_URL}/user/users`);
+    }
+
+    public updateUser(user: EditUser): Observable<User>{
+        return this.http.post<User>(`${environment.SERVER_URL}/user/update`, user);
     }
 }

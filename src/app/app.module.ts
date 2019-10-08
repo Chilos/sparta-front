@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,6 +9,12 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {NgxMaskModule, IConfig} from 'ngx-mask';
 
 import { AppComponent } from './app.component';
 import { AuthLayoutComponent } from './shared/components/auth-layout/auth-layout.component';
@@ -19,9 +24,19 @@ import { UsersPageComponent } from './users-page/users-page.component';
 import { OptionsPageComponent } from './options-page/options-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth.interceptor';
+import { UserDialogComponent } from './users-page/user-dialog/user-dialog.component';
 
 
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
+const INTERCEPTOR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor
+};
 
 @NgModule({
   declarations: [
@@ -30,13 +45,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MainLayoutComponent,
     UsersPageComponent,
     OptionsPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    UserDialogComponent
   ],
+  entryComponents: [
+    UserDialogComponent
+  ],
+
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
@@ -46,10 +66,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     MatToolbarModule,
     MatMenuModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    NgxMaskModule.forRoot(options)
   ],
 
-  providers: [],
+  providers: [ INTERCEPTOR_PROVIDER ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

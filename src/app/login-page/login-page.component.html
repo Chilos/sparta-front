@@ -13,8 +13,18 @@
           <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </a>
       </mat-form-field>
+      <mat-form-field *ngIf="needChangePassword">
+        <input matInput placeholder="Введите новый пароль" [type]="newPasswordHide ? 'password' : 'text'"
+          formControlName="newPassword">
+        <a mat-icon-button matSuffix (click)="newPasswordHide = !newPasswordHide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="passwordHide">
+          <mat-icon>{{newPasswordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </a>
+        <mat-hint align="start"><small>Количество символов доллжно быть не меньше 4</small></mat-hint>
+      </mat-form-field>
       <button type="submit" mat-raised-button color="primary" class="btn-submit"
-        [disabled]="form.invalid">Войти</button>
+        [disabled]="form.invalid || submitted">Войти</button>
+
     </form>
   </mat-card>
 </div>

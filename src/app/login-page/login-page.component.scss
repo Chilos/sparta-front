@@ -6,8 +6,7 @@
   
 }
 .card {
-  min-width: 300px;
-  max-width: 350px;
+  width: 380px;
 
   .form-container {
     display: flex;
@@ -21,7 +20,7 @@
     filter: drop-shadow(7px 7px 4px rgba(0,0,0,0.5));  
   }
 
-  btn-submit {
+  .btn-submit {
     margin-top: 1rem;
   }
 }
