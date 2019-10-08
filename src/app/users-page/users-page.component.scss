@@ -1,0 +1,17 @@
+table {
+  width: 90%;
+  margin: auto;
+
+  td,
+  th {
+    cursor: default;
+
+    div {
+        text-align: end;
+    };
+
+    button {
+      margin-left: 1rem;
+    };
+  }
+}

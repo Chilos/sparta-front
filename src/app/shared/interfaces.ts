@@ -11,6 +11,14 @@ export interface User {
     role: 'admin' | 'user';
 }
 
+export interface EditUser {
+    id?: string;
+    username: string;
+    phoneNumber?: string;
+    role: 'admin' | 'user';
+    isDropPassword: boolean;
+}
+
 export interface AuthResponse {
     id: string;
     username: string;

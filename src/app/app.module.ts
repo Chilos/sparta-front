@@ -10,6 +10,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {NgxMaskModule, IConfig} from 'ngx-mask';
 
 import { AppComponent } from './app.component';
 import { AuthLayoutComponent } from './shared/components/auth-layout/auth-layout.component';
@@ -22,7 +27,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { UserDialogComponent } from './users-page/user-dialog/user-dialog.component';
 
+
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -37,8 +45,13 @@ const INTERCEPTOR_PROVIDER: Provider = {
     MainLayoutComponent,
     UsersPageComponent,
     OptionsPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    UserDialogComponent
   ],
+  entryComponents: [
+    UserDialogComponent
+  ],
+
   imports: [
     BrowserModule,
     FormsModule,
@@ -54,7 +67,12 @@ const INTERCEPTOR_PROVIDER: Provider = {
     MatToolbarModule,
     MatMenuModule,
     FlexLayoutModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    NgxMaskModule.forRoot(options)
   ],
 
   providers: [ INTERCEPTOR_PROVIDER ],
