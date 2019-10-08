@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class UsersService {
-
+    // TODO: Систематизировать ошибки которые тут могут происходить
     constructor(private http: HttpClient) { }
 
     public getCurrentUser(): Observable<User> {
@@ -19,7 +19,15 @@ export class UsersService {
         return this.http.get<User[]>(`${environment.SERVER_URL}/user/users`);
     }
 
-    public updateUser(user: EditUser): Observable<User>{
+    public updateUser(user: EditUser): Observable<User> {
         return this.http.post<User>(`${environment.SERVER_URL}/user/update`, user);
+    }
+
+    public addUser(user: EditUser): Observable<User> {
+        return this.http.post<User>(`${environment.SERVER_URL}/user/add`, user);
+    }
+
+    public removeUser(userid: string): Observable<User> {
+        return this.http.get<User>(`${environment.SERVER_URL}/user/remove/${userid}`);
     }
 }

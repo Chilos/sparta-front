@@ -11,16 +11,28 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class UserDialogComponent implements OnInit {
 
   form: FormGroup;
-
-  constructor(public dialogRef: MatDialogRef<UserDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: User) { }
+  public header: string;
+  constructor(public dialogRef: MatDialogRef<UserDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: User | null) { }
 
   ngOnInit() {
-    this.form = new FormGroup({
-      username: new FormControl(this.data.username, [Validators.required]),
-      phoneNumber: new FormControl(this.data.phoneNumber, [Validators.required]),
-      role: new FormControl(this.data.role, [Validators.required]),
-      isDropPassword: new FormControl(false)
-    });
+    console.log(this.data);
+    if (this.data === null) {
+      this.header = 'Создание пользователя';
+      this.form = new FormGroup({
+        username: new FormControl(null, [Validators.required]),
+        phoneNumber: new FormControl(null, [Validators.required]),
+        role: new FormControl(null, [Validators.required]),
+        isDropPassword: new FormControl(true)
+      });
+    } else {
+      this.header = `Редактирование ${this.data.username}`;
+      this.form = new FormGroup({
+        username: new FormControl(this.data.username, [Validators.required]),
+        phoneNumber: new FormControl(this.data.phoneNumber, [Validators.required]),
+        role: new FormControl(this.data.role, [Validators.required]),
+        isDropPassword: new FormControl(false)
+      });
+    }
   }
   onNoClick() {
     this.dialogRef.close();
@@ -28,7 +40,7 @@ export class UserDialogComponent implements OnInit {
 
   submit() {
     const user: EditUser = {
-      id: this.data.id,
+      id: this.data ? this.data.id : null,
       username: this.form.value.username,
       phoneNumber: this.form.value.phoneNumber,
       role: this.form.value.role,

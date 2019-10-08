@@ -1,17 +1,32 @@
-table {
+.mastet-container {
   width: 90%;
   margin: auto;
 
-  td,
-  th {
-    cursor: default;
+  table {
+    margin-top: 1rem;
+    width: 100%;
 
-    div {
+    td,
+    th {
+      cursor: default;
+
+      div {
         text-align: end;
-    };
+      }
 
-    button {
-      margin-left: 1rem;
-    };
+      button {
+        margin-left: 1rem;
+      }
+    }
+
+  }
+
+  .container {
+    margin-top: .5rem;
+    text-align: center;
+
+    .btn-add-user{
+      width: 70%;
+    }
   }
 }
