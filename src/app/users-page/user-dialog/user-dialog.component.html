@@ -1,4 +1,4 @@
-<h4 mat-dialog-title>Редактирование {{data.username}}</h4>
+<h4 mat-dialog-title>{{header}}</h4>
 <mat-dialog-content [formGroup]="form" (ngSubmit)="submit()">
   <mat-form-field class="field">
     <mat-label>имя пользователя</mat-label>
@@ -18,9 +18,9 @@
     </mat-select>
   </mat-form-field>
   <br>
-  <mat-checkbox class="example-margin"  formControlName="isDropPassword">Сбросить пароль</mat-checkbox>
+  <mat-checkbox *ngIf="data" class="example-margin"  formControlName="isDropPassword">Сбросить пароль</mat-checkbox>
 </mat-dialog-content>
 <mat-dialog-actions center>
   <button mat-raised-button (click)="onNoClick()">Отмена</button>
-  <button mat-raised-button (click)="submit()">Сохранить</button>
+  <button mat-raised-button (click)="submit()" color="primary">Сохранить</button>
 </mat-dialog-actions>

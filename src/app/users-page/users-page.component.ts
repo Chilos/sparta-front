@@ -41,6 +41,28 @@ export class UsersPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  addNewUser() {
+    const dialogRef = this.dialog.open(UserDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.usersServise.addUser(result).subscribe((res) => {
+          this.snackBar.open(`Был добавлен пользователь с именем ${res.username}.`, 'закрыть', { duration: 5000, verticalPosition: 'top' });
+          this.refreshUsers();
+        }, err => {
+          this.snackBar.open(`Что-то пошло не так! `, 'закрыть', { duration: 5000, verticalPosition: 'top' });
+        });
+      }
+    });
+  }
+
+  removeUser(id: string) {
+    this.usersServise.removeUser(id).subscribe((res) => {
+      this.snackBar.open(`Пользователь с именем ${res.username} был удален.`, 'закрыть', { duration: 5000, verticalPosition: 'top' });
+      this.refreshUsers();
+    });
+  }
+
   ngOnInit() {
     this.usersServise.getCurrentUser().subscribe((res) => {
       this.currentUser = res;
