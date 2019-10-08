@@ -47,7 +47,7 @@ export class AuthService {
                 break;
         }
 
-        return throwError(error);
+        return throwError(error_code);
     }
 
     logout() {

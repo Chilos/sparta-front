@@ -34,17 +34,17 @@ export class LoginPageComponent implements OnInit {
     this.auth.error$.subscribe(res => {
       switch (res) {
         case 'USER_NOT_FOUND':
-            this.snackBar.open('Неверное имя пользователя.', 'закрыть', { duration: 5000, verticalPosition: 'top' });
-            break;
+          this.snackBar.open('Неверное имя пользователя.', 'закрыть', { duration: 5000, verticalPosition: 'top' });
+          break;
         case 'INVALID_PASSWORD':
-            this.snackBar.open('Неверный пароль.', 'закрыть', { duration: 5000, verticalPosition: 'top' });
-            break;
+          this.snackBar.open('Неверный пароль.', 'закрыть', { duration: 5000, verticalPosition: 'top' });
+          break;
         case 'CHANGE_PASSWORD':
-            this.snackBar.open('Был выполнен сброс пароля. Укажите новый.', 'закрыть', { duration: 5000, verticalPosition: 'top' });
-            this.form.controls.newPassword.setValidators([Validators.required, Validators.minLength(4)]);
-            this.needChangePassword = true;
-            break;
-    }
+          this.snackBar.open('Был выполнен сброс пароля. Укажите новый.', 'закрыть', { duration: 5000, verticalPosition: 'top' });
+          this.form.controls.newPassword.setValidators([Validators.required, Validators.minLength(4)]);
+          this.needChangePassword = true;
+          break;
+      }
     });
   }
 

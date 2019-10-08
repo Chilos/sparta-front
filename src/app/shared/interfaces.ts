@@ -5,9 +5,9 @@ export interface LoginUser {
 }
 
 export interface User {
-    id: string;
+    id?: string;
     username: string;
-    phoneNumber: string;
+    phoneNumber?: string;
     role: 'admin' | 'user';
 }
 

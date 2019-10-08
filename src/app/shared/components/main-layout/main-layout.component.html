@@ -7,7 +7,7 @@
 
     </nav>
     <span fxFlex="auto"></span>
-    <button mat-button [matMenuTriggerFor]="menu" class="menu">{{curentUser.username}}
+    <button mat-button [matMenuTriggerFor]="menu" class="menu">{{curentUser.username}}({{curentUser.role}})
       <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
     <mat-menu #menu="matMenu">

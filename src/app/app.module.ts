@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,9 +20,15 @@ import { OptionsPageComponent } from './options-page/options-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth.interceptor';
 
 
-
+const INTERCEPTOR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor
+}
 
 @NgModule({
   declarations: [
@@ -51,7 +57,7 @@ import { SharedModule } from './shared/shared.module';
     MatSnackBarModule
   ],
 
-  providers: [],
+  providers: [ INTERCEPTOR_PROVIDER ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
