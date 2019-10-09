@@ -7,6 +7,7 @@ export interface LoginUser {
 export interface User {
     id?: string;
     username: string;
+    realName: string;
     phoneNumber?: string;
     role: 'admin' | 'user';
 }
@@ -14,6 +15,7 @@ export interface User {
 export interface EditUser {
     id?: string;
     username: string;
+    realName: string;
     phoneNumber?: string;
     role: 'admin' | 'user';
     isDropPassword: boolean;

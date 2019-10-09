@@ -16,7 +16,7 @@ export class UsersPageComponent implements OnInit, OnDestroy {
 
   public users: User[];
   private currentUser: User;
-  public displayedColumns: string[] = ['username', 'phoneNumber', 'role', 'action'];
+  public displayedColumns: string[] = ['username', 'realName', 'phoneNumber', 'role', 'action'];
   uSub: Subscription;
   constructor(
     private usersServise: UsersService,

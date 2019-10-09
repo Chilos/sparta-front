@@ -1,8 +1,13 @@
 <h4 mat-dialog-title>{{header}}</h4>
 <mat-dialog-content [formGroup]="form" (ngSubmit)="submit()">
-  <mat-form-field class="field">
+  <mat-form-field class="field" *ngIf="isCreateForm">
     <mat-label>имя пользователя</mat-label>
     <input matInput formControlName="username">
+  </mat-form-field>
+  <br>
+  <mat-form-field class="field">
+    <mat-label>ФИО</mat-label>
+    <input matInput formControlName="realName">
   </mat-form-field>
   <br>
   <mat-form-field class="field">

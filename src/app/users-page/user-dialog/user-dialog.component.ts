@@ -12,14 +12,18 @@ export class UserDialogComponent implements OnInit {
 
   form: FormGroup;
   public header: string;
+  public isCreateForm: boolean;
+
   constructor(public dialogRef: MatDialogRef<UserDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: User | null) { }
 
   ngOnInit() {
-    console.log(this.data);
-    if (this.data === null) {
+    this.isCreateForm = this.data === null;
+    if (this.isCreateForm) {
+
       this.header = 'Создание пользователя';
       this.form = new FormGroup({
         username: new FormControl(null, [Validators.required]),
+        realName: new FormControl(null, [Validators.required]),
         phoneNumber: new FormControl(null, [Validators.required]),
         role: new FormControl(null, [Validators.required]),
         isDropPassword: new FormControl(true)
@@ -27,7 +31,7 @@ export class UserDialogComponent implements OnInit {
     } else {
       this.header = `Редактирование ${this.data.username}`;
       this.form = new FormGroup({
-        username: new FormControl(this.data.username, [Validators.required]),
+        realName: new FormControl(this.data.realName, [Validators.required]),
         phoneNumber: new FormControl(this.data.phoneNumber, [Validators.required]),
         role: new FormControl(this.data.role, [Validators.required]),
         isDropPassword: new FormControl(false)
@@ -41,7 +45,8 @@ export class UserDialogComponent implements OnInit {
   submit() {
     const user: EditUser = {
       id: this.data ? this.data.id : null,
-      username: this.form.value.username,
+      username: this.isCreateForm ? this.form.value.username : this.data.username,
+      realName: this.form.value.realName,
       phoneNumber: this.form.value.phoneNumber,
       role: this.form.value.role,
       isDropPassword: this.form.value.isDropPassword,
