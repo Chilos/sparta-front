@@ -29,6 +29,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { UserDialogComponent } from './users-page/user-dialog/user-dialog.component';
 import { RolePipe } from './shared/role.pipe';
+import { WorkShiftDialogComponent } from './options-page/work-shift-dialog/work-shift-dialog.component';
 
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
@@ -48,10 +49,12 @@ const INTERCEPTOR_PROVIDER: Provider = {
     OptionsPageComponent,
     LoginPageComponent,
     UserDialogComponent,
-    RolePipe
+    RolePipe,
+    WorkShiftDialogComponent,
   ],
   entryComponents: [
-    UserDialogComponent
+    UserDialogComponent,
+    WorkShiftDialogComponent
   ],
 
   imports: [
@@ -74,7 +77,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     MatDialogModule,
     MatSelectModule,
     MatCheckboxModule,
-    NgxMaskModule.forRoot(options)
+    NgxMaskModule.forRoot(options),
   ],
 
   providers: [ INTERCEPTOR_PROVIDER ],

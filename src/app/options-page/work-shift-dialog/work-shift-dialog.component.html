@@ -1,0 +1,22 @@
+<h4 mat-dialog-title>{{header}}</h4>
+<mat-dialog-content [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field class="field">
+    <mat-label>Наименование</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+  <br>
+  <mat-form-field class="field">
+    <mat-label>Время начала</mat-label>
+    <input matInput  type='time' formControlName="beginTime">
+  </mat-form-field>
+  <br>
+  <mat-form-field class="field">
+    <mat-label>Время конца</mat-label>
+    <input matInput type='time' formControlName="endTime">
+  </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions center>
+  <button mat-raised-button (click)="onNoClick()">Отмена</button>
+  <button mat-raised-button (click)="submit()" color="primary">Сохранить</button>
+</mat-dialog-actions>

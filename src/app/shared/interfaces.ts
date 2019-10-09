@@ -1,3 +1,6 @@
+import { Time } from '@angular/common';
+import { Moment } from 'moment';
+
 export interface LoginUser {
     username: string;
     password: string;
@@ -9,7 +12,7 @@ export interface User {
     username: string;
     realName: string;
     phoneNumber?: string;
-    role: 'admin' | 'coach' | 'groupCoach' | 'manager'| 'user';
+    role: 'admin' | 'coach' | 'groupCoach' | 'manager' | 'user';
 }
 
 export interface EditUser {
@@ -17,15 +20,29 @@ export interface EditUser {
     username: string;
     realName: string;
     phoneNumber?: string;
-    role: 'admin' | 'coach'| 'groupCoach' | 'manager'| 'user';
+    role: 'admin' | 'coach' | 'groupCoach' | 'manager' | 'user';
     isDropPassword: boolean;
 }
 
 export interface AuthResponse {
     id: string;
     username: string;
-    role: 'admin' | 'coach' | 'groupCoach' | 'manager'| 'user';
+    role: 'admin' | 'coach' | 'groupCoach' | 'manager' | 'user';
     needChangePassword: boolean;
     token: string;
     tokenExpirationTime: number;
+}
+
+export interface WorkShift {
+    id?: string;
+    name?: string;
+    role: string;
+    beginTime?: Date;
+    endTime?: Date;
+    workDaysPeriod: WorkDaysPeriod;
+}
+
+export enum WorkDaysPeriod {
+    Weekday,
+    Weekend
 }

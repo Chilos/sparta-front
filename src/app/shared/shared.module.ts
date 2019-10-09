@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
     declarations: [],
     imports: [
         CommonModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     exports: [ HttpClientModule ],
     providers: [],
