@@ -28,6 +28,7 @@ import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { UserDialogComponent } from './users-page/user-dialog/user-dialog.component';
+import { RolePipe } from './shared/role.pipe';
 
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
@@ -46,7 +47,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
     UsersPageComponent,
     OptionsPageComponent,
     LoginPageComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    RolePipe
   ],
   entryComponents: [
     UserDialogComponent
