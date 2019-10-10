@@ -1,0 +1,48 @@
+.master-container {
+  width: 90%;
+  margin: auto;
+
+  .container-1 {
+
+    table {
+      width: 100%;
+    }
+
+    .container {
+      text-align: center;
+      padding: 0.5rem;
+      background-color: #fff;
+
+      .btn-add-shift {
+        width: 70%;
+      }
+    }
+  }
+
+  .box-container {
+    float: left;
+    width: 100%;
+    margin: 1rem;
+  }
+
+  .box-group {
+    width: 100%;
+  }
+
+  .box-header {
+    background-color: #fff;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .box-1 {
+    float: left;
+    width: 50%;
+
+  }
+
+  .box-2 {
+    display: inline-block;
+    width: 50%;
+  }
+}

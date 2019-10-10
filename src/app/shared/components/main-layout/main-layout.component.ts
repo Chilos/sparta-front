@@ -15,6 +15,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
 
   public curentUser: User = {
     username: '',
+    realName: '',
     role: 'admin'
   };
 

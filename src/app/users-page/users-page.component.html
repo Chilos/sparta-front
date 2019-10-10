@@ -11,6 +11,12 @@
       <td mat-cell *matCellDef="let user"> {{user.username}} </td>
     </ng-container>
 
+    <!-- Position Column -->
+    <ng-container matColumnDef="realName">
+      <th mat-header-cell *matHeaderCellDef>ФИО</th>
+      <td mat-cell *matCellDef="let user"> {{user.realName}} </td>
+    </ng-container>
+
     <!-- Name Column -->
     <ng-container matColumnDef="phoneNumber">
       <th mat-header-cell *matHeaderCellDef> Телефон </th>
@@ -20,7 +26,7 @@
     <!-- Weight Column -->
     <ng-container matColumnDef="role">
       <th mat-header-cell *matHeaderCellDef> Права </th>
-      <td mat-cell *matCellDef="let user"> {{user.role}} </td>
+      <td mat-cell *matCellDef="let user"> {{user.role | role}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
@@ -28,8 +34,8 @@
       <th mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let user">
         <div>
-          <button mat-flat-button color="accent" (click)="openDialog(user)">редактировать</button>
-          <button mat-flat-button color="warn" (click)="removeUser(user.id)">удалить</button>
+          <button mat-icon-button color="accent" (click)="openDialog(user)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="warn" (click)="removeUser(user.id)"><mat-icon>delete</mat-icon></button>
         </div>
       </td>
     </ng-container>
@@ -38,7 +44,8 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <mat-card class="container mat-elevation-z6">
-    <button mat-raised-button color="primary" class="btn-add-user" (click)="addNewUser()">Добавить нового пользователя</button>
+    <button mat-raised-button color="primary" class="btn-add-user" (click)="addNewUser()">Добавить нового
+      пользователя</button>
   </mat-card>
 
 </div>
