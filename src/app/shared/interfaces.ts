@@ -1,6 +1,3 @@
-import { Time } from '@angular/common';
-import { Moment } from 'moment';
-
 export interface LoginUser {
     username: string;
     password: string;
@@ -37,8 +34,8 @@ export interface WorkShift {
     id?: string;
     name?: string;
     role: string;
-    beginTime?: Date;
-    endTime?: Date;
+    beginTime?: number;
+    endTime?: number;
     workDaysPeriod: WorkDaysPeriod;
 }
 

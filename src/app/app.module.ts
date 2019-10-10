@@ -30,6 +30,7 @@ import { AuthInterceptor } from './shared/auth.interceptor';
 import { UserDialogComponent } from './users-page/user-dialog/user-dialog.component';
 import { RolePipe } from './shared/role.pipe';
 import { WorkShiftDialogComponent } from './options-page/work-shift-dialog/work-shift-dialog.component';
+import { MomentPipe } from './shared/moment.pipe';
 
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
@@ -51,6 +52,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     UserDialogComponent,
     RolePipe,
     WorkShiftDialogComponent,
+    MomentPipe
   ],
   entryComponents: [
     UserDialogComponent,

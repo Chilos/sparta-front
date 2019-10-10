@@ -31,13 +31,12 @@ export class OptionsPageComponent implements OnInit {
 
   private refreshComponent() {
     this.workShiftidServise.getAllWorkShifts().subscribe(res => {
-      this.managerWorkShiftsWeekday = res.filter(r => r.role === 'manager' && r.workDaysPeriod == WorkDaysPeriod.Weekday);
+      this.managerWorkShiftsWeekday = res.filter(r => r.role === 'manager' && r.workDaysPeriod === WorkDaysPeriod.Weekday);
       this.managerWorkShiftsWeekend = res.filter(r => r.role === 'manager' && r.workDaysPeriod === WorkDaysPeriod.Weekend);
       this.coachWorkShiftsWeekday = res.filter(r => r.role === 'coach' && r.workDaysPeriod === WorkDaysPeriod.Weekday);
       this.coachWorkShiftsWeekend = res.filter(r => r.role === 'coach' && r.workDaysPeriod === WorkDaysPeriod.Weekend);
-      console.log(res);
     });
-    
+
   }
 
   editWorkShift(workShift: WorkShift) {
@@ -54,29 +53,50 @@ export class OptionsPageComponent implements OnInit {
     });
   }
   removeWorkShift(id: string) {
-
+    this.workShiftidServise.removeWorkShift(id).subscribe((res) => {
+      this.snackBar.open(`Смена ${res.name} была удалена.`, 'закрыть', { duration: 5000, verticalPosition: 'top' });
+      this.refreshComponent();
+    }, err => {
+      this.snackBar.open(`Что-то пошло не так! `, 'закрыть', { duration: 5000, verticalPosition: 'top' });
+    });
   }
+
+  private addWorkShift(dialogResult) {
+    if (dialogResult) {
+      this.workShiftidServise.addWorkShift(dialogResult).subscribe((res) => {
+        this.snackBar.open(`Данные смены ${res.name} были сохранены.`, 'закрыть', { duration: 5000, verticalPosition: 'top' });
+        this.refreshComponent();
+      }, err => {
+        this.snackBar.open(`Что-то пошло не так! `, 'закрыть', { duration: 5000, verticalPosition: 'top' });
+      });
+    }
+  }
+
   addWorkShiftManagerWeekday() {
     this.openDialog({ workDaysPeriod: WorkDaysPeriod.Weekday, role: 'manager' });
 
     this.dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.workShiftidServise.addWorkShift(result).subscribe((res) => {
-          this.snackBar.open(`Данные смены ${res.name} были сохранены.`, 'закрыть', { duration: 5000, verticalPosition: 'top' });
-        }, err => {
-          this.snackBar.open(`Что-то пошло не так! `, 'закрыть', { duration: 5000, verticalPosition: 'top' });
-        });
-      }
+      this.addWorkShift(result);
     });
+    
   }
   addWorkShiftManagerWeekend() {
     this.openDialog({ workDaysPeriod: WorkDaysPeriod.Weekend, role: 'manager' });
+    this.dialogRef.afterClosed().subscribe(result => {
+      this.addWorkShift(result);
+    });
   }
   addWorkShiftcoachWeekday() {
     this.openDialog({ workDaysPeriod: WorkDaysPeriod.Weekday, role: 'coach' });
+    this.dialogRef.afterClosed().subscribe(result => {
+      this.addWorkShift(result);
+    });
   }
   addWorkShiftcoachWeekend() {
     this.openDialog({ workDaysPeriod: WorkDaysPeriod.Weekend, role: 'coach' });
+    this.dialogRef.afterClosed().subscribe(result => {
+      this.addWorkShift(result);
+    });
   }
 
   openDialog(shift: WorkShift | null) {
