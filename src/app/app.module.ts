@@ -31,6 +31,7 @@ import { UserDialogComponent } from './users-page/user-dialog/user-dialog.compon
 import { RolePipe } from './shared/role.pipe';
 import { WorkShiftDialogComponent } from './options-page/work-shift-dialog/work-shift-dialog.component';
 import { MomentPipe } from './shared/moment.pipe';
+import { SchelduleShiftManagerComponent } from './scheldule-shift-manager/scheldule-shift-manager.component';
 
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
@@ -52,7 +53,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
     UserDialogComponent,
     RolePipe,
     WorkShiftDialogComponent,
-    MomentPipe
+    MomentPipe,
+    SchelduleShiftManagerComponent,
   ],
   entryComponents: [
     UserDialogComponent,
