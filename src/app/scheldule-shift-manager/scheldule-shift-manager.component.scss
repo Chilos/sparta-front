@@ -1,25 +1,58 @@
+.datepicker-container {
+  width: 90%;
+  background-color: #fff;
+  margin: auto;
+  min-width: 600px;
+  text-align: center;
+  margin-top: 1rem;
+}
+.date-picker {
+  margin: 10px;
+}
 .mastet-container {
     width: 90%;
+    min-width: 600px;
     margin: auto;
     background-color: #fff;
-
+    overflow: auto;
     
 }
 
-td, th {
+td,  tr {
     padding: 5px;
+    text-align: center;
+}
+.mat-header-cell {
+  text-align: center;  
+ }
+
+td{
+  border-left: 1px solid #e0e0e0;
 }
 
 table {
     width: 800px;
+
+    .select{
+      width: 40px;
+    }
   }
-  
+
   td.mat-column-star {
     width: 20px;
     padding-right: 8px;
   }
   
   th.mat-column-position, td.mat-column-position {
-    padding-left: 8px;
+    padding-left: 1px;
   }
+  
+  .mat-table-sticky:first-child {
+    border-right: 1px solid #e0e0e0;
+  }
+  
+  .mat-table-sticky:last-child {
+    border-left: 1px solid #e0e0e0;
+  }
+
   

@@ -6,15 +6,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatTableModule} from '@angular/material/table';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatSelectModule} from '@angular/material/select';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {NgxMaskModule, IConfig} from 'ngx-mask';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 import { AppComponent } from './app.component';
 import { AuthLayoutComponent } from './shared/components/auth-layout/auth-layout.component';
@@ -32,6 +34,7 @@ import { RolePipe } from './shared/role.pipe';
 import { WorkShiftDialogComponent } from './options-page/work-shift-dialog/work-shift-dialog.component';
 import { MomentPipe } from './shared/moment.pipe';
 import { SchelduleShiftManagerComponent } from './scheldule-shift-manager/scheldule-shift-manager.component';
+import { from } from 'rxjs';
 
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
@@ -82,9 +85,12 @@ const INTERCEPTOR_PROVIDER: Provider = {
     MatSelectModule,
     MatCheckboxModule,
     NgxMaskModule.forRoot(options),
+    MatDatepickerModule,
+    MatMomentDateModule
+
   ],
 
-  providers: [ INTERCEPTOR_PROVIDER ],
+  providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
