@@ -8,20 +8,26 @@ import { UsersPageComponent } from './users-page/users-page.component';
 import { OptionsPageComponent } from './options-page/options-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { SchelduleShiftManagerComponent } from './scheldule-shift-manager/scheldule-shift-manager.component';
 
 
 const routes: Routes = [
-  {path: '', component: MainLayoutComponent, children: [
-    {path: '', redirectTo: '/users', pathMatch: 'full'},
-    {path: 'users', component: UsersPageComponent, canActivate: [AuthGuard]},
-    {path: 'options', component: OptionsPageComponent, canActivate: [AuthGuard]},
+  {
+    path: '', component: MainLayoutComponent, children: [
+      { path: '', redirectTo: '/users', pathMatch: 'full' },
+      { path: 'users', component: UsersPageComponent, canActivate: [AuthGuard] },
+      { path: 'options', component: OptionsPageComponent, canActivate: [AuthGuard] },
+      { path: 'scheldule-shift-manager', component: SchelduleShiftManagerComponent, canActivate: [AuthGuard] }
 
-  ]},
-  {path: '', component: AuthLayoutComponent, children: [
-    {path: '', redirectTo: '/login', pathMatch: 'full'},
-    {path: 'login', component: LoginPageComponent }
-  ]},
-  {path: '**', redirectTo: 'login'}
+    ]
+  },
+  {
+    path: '', component: AuthLayoutComponent, children: [
+      { path: '', redirectTo: '/login', pathMatch: 'full' },
+      { path: 'login', component: LoginPageComponent }
+    ]
+  },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({

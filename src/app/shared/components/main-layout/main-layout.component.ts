@@ -39,6 +39,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
     this.routes = [
       { link: ['/users'], name: 'Пользователи' },
       { link: ['/options'], name: 'Опции' },
+      { link: ['/scheldule-shift-manager'], name: 'График дежурных смен' },
     ];
   }
 
